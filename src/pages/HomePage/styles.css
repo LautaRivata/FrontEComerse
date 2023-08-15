@@ -1,0 +1,36 @@
+.search-bar-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  display: flex;
+  flex-direction: column;
+  width: 10rem;
+}
+
+#ordenar {
+  display: block;
+}
+
+.btn {
+  cursor: pointer;
+  background-color: #7286d3;
+  color: #e5e0ff;
+  border-radius: 0.5rem;
+  border: 0;
+  margin: 0.5rem 0;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+}
+
+.btn:hover {
+  background-color: #e5e0ff;
+  color: #7286d3;
+}
+
+.hackaton-comprar button {
+  background-color: red;
+}

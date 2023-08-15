@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-weight: 300;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --strongest: #7286d3;
+  --strong: #8ea7e9;
+  --neutral: #e5e0ff;
+  --weak: #fff2f2;
+  --weakest: #ffffff;
+}
+
+/* :root {
+	--strongest: #01395C;
+	--strong: #7C96A8;
+	--neutral: #8AC6BF;
+	--weak: #F0E5D6;
+	--weakest: #F28C81;
+} */
+/* :root {
+	--strongest: #042940;
+	--strong: #005c53;
+	--neutral: #9fc131;
+	--weak: #dbf227;
+	--weakest: #d6d58e;
+} */
+/* :root {
+	--strongest: #353C40;
+	--strong: #575958;
+	--neutral: #8C877D;
+	--weak: #D9C3A9;
+	--weakest: #F2DCC2;
+} */
+/* :root {
+	--strongest: #487357;
+	--strong: #aabfa4;
+	--neutral: #f2d785;
+	--weak: #f2e9ce;
+	--weakest: #f2e8dc;
+} */
+
+body,
+html {
+  margin: 2rem;
+}
