@@ -1,6 +1,6 @@
 "use strict"
 
-import { peek } from "../utils"
+import { peek } from "."
 
 const calcTotalPrice = products => {
   // return peek(products)[0]?.price

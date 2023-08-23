@@ -1,7 +1,7 @@
 import { Avatar, List, Button } from "antd"
 import { CloseOutlined } from "@ant-design/icons"
 import { useCartStore } from "../../stores"
-import { calcTotalPrice } from "../../hackaton-utilities"
+import { calcTotalPrice } from "../../utils"
 
 const Cart = () => {
   const products = useCartStore(state => state.products)

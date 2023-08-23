@@ -1,3 +1,18 @@
+.contenedor {
+}
+
+.main {
+  background: #fff;
+  padding: 20px;
+
+  flex: 1;
+  /*flex:1;*/
+
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000;
+}
+
 .search-bar-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
@@ -15,6 +30,19 @@
   display: block;
 }
 
+.div-comprar {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.div-comprar button {
+  background-color: deepskyblue;
+}
+
 .btn {
   cursor: pointer;
   background-color: #7286d3;
@@ -27,10 +55,6 @@
 }
 
 .btn:hover {
-  background-color: #e5e0ff;
-  color: #7286d3;
-}
-
-.hackaton-comprar button {
-  background-color: red;
+  background-color: #fcfcfc;
+  color: #000000;
 }

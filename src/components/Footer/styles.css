@@ -1,0 +1,44 @@
+.footer {
+  background: var(--otro--dos);
+  padding: 20px;
+
+  /* Flexbox */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.footer .links {
+  /*background:#c0392b;*/
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer .links a {
+  flex-grow: 1;
+
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.footer .links a:hover {
+  background: var(--otro--uno);
+}
+
+.footer .social {
+  /*background:#e67e22;*/
+  text-decoration: none;
+}
+
+.footer .social a:hover {
+  background-color: var(--otro--uno);
+}
+
+.footer .social a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+}

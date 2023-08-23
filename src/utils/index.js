@@ -1,3 +1,5 @@
 import peek from "./peek"
+import addFilters from "./addFilters"
+import calcTotalPrice from "./calcTotalPrice"
 
-export { peek }
+export { peek, addFilters, calcTotalPrice }

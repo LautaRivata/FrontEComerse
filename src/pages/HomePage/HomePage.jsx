@@ -1,12 +1,11 @@
 import { useState } from "react"
-import { Cart, Products } from "../../components"
+import { Cart, Products, Header, Footer } from "../../components"
 import { useOrderMutation, useProductosQuery } from "../../hooks"
 import { useCartStore } from "../../stores"
 import { Button, Drawer } from "antd"
 import { ShoppingCartOutlined } from "@ant-design/icons"
-import { addFilters } from "../../hackaton-utilities"
+import { addFilters } from "../../utils"
 import "./styles.css"
-import "../../hackaton-utilities/hackaton-styles.css"
 
 function HomePage() {
   const [title, setTitle] = useState("")
@@ -19,87 +18,92 @@ function HomePage() {
   const orderProducts = useCartStore(state => state.products)
 
   return (
-    <section>
-      <Drawer
-        title={
-          <div className="hackaton-comprar">
-            <Button onClick={() => createOrder({ order: orderProducts })}>
-              Comprar
-            </Button>
-            <p>Tus Productos</p>
-          </div>
-        }
-        onClose={() => setIsShow(false)}
-        open={isShow}
-      >
-        <Cart />
-      </Drawer>
+    <div className="contenedor">
+      <Header></Header>
+      <br />
+      <section className="main">
+        <Drawer
+          title={
+            <div className="div-comprar">
+              <Button onClick={() => createOrder({ order: orderProducts })}>
+                Comprar
+              </Button>
+              <p>Tus Productos</p>
+            </div>
+          }
+          onClose={() => setIsShow(false)}
+          open={isShow}
+        >
+          <Cart />
+        </Drawer>
 
-      <nav className="search-bar-grid">
-        <h3>Buscar por:</h3>
+        <nav className="search-bar-grid">
+          <h3>Buscar por:</h3>
 
-        <div className="search-input">
-          <label htmlFor="nombre">Nombre:</label>
-          <input
-            id="nombre"
-            type="text"
-            onChange={e => setTitle(e.target.value.toLowerCase())}
-          />
-        </div>
-
-        <div className="search-input">
-          <label htmlFor="precio">Precio mínimo:</label>
-          <input
-            id="precio"
-            type="number"
-            onChange={e => setPrice(e.target.valueAsNumber || 0)}
-          />
-        </div>
-
-        <div className="search-input">
-          <label htmlFor="categoria">Categoría:</label>
-          <select
-            id="categoria"
-            value={category}
-            onChange={e => setCategory(e.target.value)}
-          >
-            <option value="">-</option>
-
-            {categories.map((uniqueCategory, i) => (
-              <option value={uniqueCategory} key={`${i}-${uniqueCategory}`}>
-                {uniqueCategory}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="search-input">
-          <label htmlFor="ordenar">
-            Ordenar:
+          <div className="search-input">
+            <label htmlFor="nombre">Nombre:</label>
             <input
-              id="ordenar"
-              type="checkbox"
-              defaultChecked={false}
-              onClick={e => setIsSort(e.currentTarget.checked)}
+              id="nombre"
+              type="text"
+              onChange={e => setTitle(e.target.value.toLowerCase())}
             />
-          </label>
-        </div>
+          </div>
 
-        <div>
-          <Button type="primary" size="large" onClick={() => setIsShow(true)}>
-            <ShoppingCartOutlined />
-          </Button>
-        </div>
-      </nav>
+          <div className="search-input">
+            <label htmlFor="precio">Precio mínimo:</label>
+            <input
+              id="precio"
+              type="number"
+              onChange={e => setPrice(e.target.valueAsNumber || 0)}
+            />
+          </div>
 
-      {isLoading ? (
-        <span>cargando...</span>
-      ) : (
-        <Products
-          products={addFilters(products, { price, category, title, isSort })}
-        />
-      )}
-    </section>
+          <div className="search-input">
+            <label htmlFor="categoria">Categoría:</label>
+            <select
+              id="categoria"
+              value={category}
+              onChange={e => setCategory(e.target.value)}
+            >
+              <option value="">-</option>
+
+              {categories.map((uniqueCategory, i) => (
+                <option value={uniqueCategory} key={`${i}-${uniqueCategory}`}>
+                  {uniqueCategory}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="search-input">
+            <label htmlFor="ordenar">
+              Ordenar:
+              <input
+                id="ordenar"
+                type="checkbox"
+                defaultChecked={false}
+                onClick={e => setIsSort(e.currentTarget.checked)}
+              />
+            </label>
+          </div>
+
+          <div>
+            <Button type="primary" size="large" onClick={() => setIsShow(true)}>
+              <ShoppingCartOutlined />
+            </Button>
+          </div>
+        </nav>
+
+        {isLoading ? (
+          <span>cargando...</span>
+        ) : (
+          <Products
+            products={addFilters(products, { price, category, title, isSort })}
+          />
+        )}
+      </section>
+      <Footer />
+    </div>
   )
 }
 

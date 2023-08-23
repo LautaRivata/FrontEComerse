@@ -1,6 +1,6 @@
 "use strict"
 
-import { peek } from "../utils"
+import { peek } from "."
 
 const addFilters = (products, filters) => {
   peek(products)
