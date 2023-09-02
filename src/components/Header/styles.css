@@ -11,9 +11,9 @@
 }
 
 .header {
-  background: var(--otro--dos);
+  background: #1677ff;
   padding: 10px;
-
+  border-radius: 6px;
   /* Flexbox */
   display: flex;
   justify-content: space-between;

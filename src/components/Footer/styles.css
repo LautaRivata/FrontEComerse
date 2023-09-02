@@ -1,6 +1,8 @@
 .footer {
-  background: var(--otro--dos);
+  background: #1677ff;
   padding: 20px;
+  border-radius: 6px;
+  margin-top: 10px;
 
   /* Flexbox */
   display: flex;
@@ -9,7 +11,6 @@
 }
 
 .footer .links {
-  /*background:#c0392b;*/
   display: flex;
   flex-wrap: wrap;
 }
@@ -28,7 +29,6 @@
 }
 
 .footer .social {
-  /*background:#e67e22;*/
   text-decoration: none;
 }
 

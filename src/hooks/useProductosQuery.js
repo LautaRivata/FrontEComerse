@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import axios from "axios"
-
-const getProducts = () =>
-  axios.get("/api/products").then(({ data }) => data)
+/*aca es donde tengo que mandar el axios a https://fakestoreapi.com/products si quisiera hacerlo directo*/
+const getProducts = () => axios.get("/api/products").then(({ data }) => data)
 
 const useProductosQuery = () => {
   const { data: products = [], isLoading } = useQuery({

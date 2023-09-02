@@ -1,0 +1,11 @@
+.registerMain {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  flex-grow: 1;
+  flex-direction: column;
+  justify-content: center;
+}
+.registerMain input {
+  margin-bottom: 10px;
+}
