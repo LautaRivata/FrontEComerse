@@ -1,10 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import { Button, Card, Image } from "antd"
 import { useCartStore } from "../../stores"
 import "./styles.css"
 
+const handelEdit = pk => {
+  console.log("Editar", pk)
+}
+
 const Product = productProps => {
-  const { title, text, imageLink, price } = productProps
+  const { title, text, imageLink, price, primarikey, category } = productProps
   const actions = useCartStore(state => state.actions)
 
   return (
@@ -20,6 +24,9 @@ const Product = productProps => {
       }
     >
       <Card.Meta title={price && <p>${price}</p>} description={text} />
+      <Button type="primary" onClick={handelEdit(primarikey)}>
+        Editar Producto
+      </Button>
     </Card>
   )
 }

@@ -2,7 +2,7 @@ import React from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import { ErrorPage, HomePage, LogInPage, RegisterPage } from "./pages"
+import { ErrorPage, HomePage, LogInPage, RegisterPage, EditPage } from "./pages"
 
 const queryClient = new QueryClient()
 
@@ -15,6 +15,8 @@ function App() {
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/login" element={<LogInPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/logout" element={<ErrorPage />} />
+          <Route path="/EditPage/:id?" element={<EditPage />} />
         </Routes>
       </BrowserRouter>
 

@@ -1,7 +1,34 @@
 import React from "react"
-import { Button, Checkbox, Form, Input } from "antd"
+import { Header, Footer } from "../../components"
+import { Button, Form, Input } from "antd"
+import { notification } from "antd"
+import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons"
+import { checkLogin } from "../../utils"
+
+const openLogFailNotification = title =>
+  notification.open({
+    message: `¡Usuario o Contrasena Incorrectos!`,
+    description: title,
+    placement: "topLeft",
+    icon: <ExclamationOutlined style={{ color: "#108ee9" }} />,
+  })
+
+const openLogCorrectNotification = title =>
+  notification.open({
+    message: `¡Usuario Logeado Correctamente!`,
+    description: title,
+    placement: "topLeft",
+    icon: <CheckOutlined style={{ color: "green" }} />,
+  })
+
 const onFinish = values => {
-  console.log("Success:", values)
+  checkLogin(values).then(data => {
+    if (data.log === true) {
+      openLogCorrectNotification(data.user)
+    } else {
+      openLogFailNotification(data.user)
+    }
+  })
 }
 const onFinishFailed = errorInfo => {
   console.log("Failed:", errorInfo)
@@ -61,13 +88,7 @@ const LogInPage = () => {
               span: 16,
             }}
           >
-            <Button
-              type="primary"
-              htmlType="submit"
-              onClick={() => {
-                console.log("click")
-              }}
-            >
+            <Button type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

@@ -1,7 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Cart, Products, Header, Footer } from "../../components"
 import { useOrderMutation, useProductosQuery } from "../../hooks"
-import { useCartStore } from "../../stores"
+import { useCartStore, useCategoriesStore } from "../../stores"
 import { Button, Drawer } from "antd"
 import { ShoppingCartOutlined } from "@ant-design/icons"
 import { addFilters } from "../../utils"
@@ -16,6 +16,11 @@ function HomePage() {
   const [isShow, setIsShow] = useState(false)
   const { createOrder } = useOrderMutation()
   const orderProducts = useCartStore(state => state.products)
+  const accionsCategory = useCategoriesStore(state => state.addCategories)
+
+  useEffect(() => {
+    accionsCategory(categories)
+  }, [categories])
 
   return (
     <div className="contenedor">

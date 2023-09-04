@@ -33,7 +33,6 @@ const useCartStore = create(set => ({
             openDeleteNotification(title)
             return false
           }
-
           return true
         }),
       })),
