@@ -24,7 +24,7 @@ function HomePage() {
 
   return (
     <div className="contenedor">
-      <Header></Header>
+      <Header />
       <br />
       <section className="main">
         <Drawer

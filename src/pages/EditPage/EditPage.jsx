@@ -1,19 +1,28 @@
 import React from "react"
+import { useParams } from "react-router-dom"
 import { Header, Footer } from "../../components"
+import { useProductosQuery } from "../../hooks"
 import { Button, Input, Select } from "antd"
 import { useState } from "react"
 import { useCategoriesStore } from "../../stores"
+import { peek } from "../../utils"
 import "./styles.css"
 
 const EditPage = (productProps = {}) => {
-  const { title, text, imageLink, price, primarikey, category } = productProps
   const categories = useCategoriesStore(state => state.categories)
-  const [newTitle, setNewTitle] = useState("")
-  const [newDescription, setNewDescription] = useState("")
-  const [newPrice, setNewPrice] = useState("")
-  const [newCategoy, setNewCategory] = useState("")
-  const [newImageLink, setNewImageLink] = useState("")
+  const { products } = useProductosQuery()
+  const idProduct = useParams().id
+  const foundProduct = products.find(product => product.id == idProduct) || {}
 
+  const [title, setTitle] = useState(peek(foundProduct.title || ""))
+  const [description, setDescription] = useState(foundProduct.description || "")
+  const [price, setPrice] = useState(foundProduct.price || "")
+  const [category, setCategory] = useState(foundProduct.category || "")
+  const [imageLink, setImageLink] = useState(foundProduct.image || "")
+
+  console.log(idProduct)
+  console.log(products)
+  console.log(products.find(product => product.id == idProduct))
   const handleCancel = () => {
     console.log("Boton: Cancel")
   }
@@ -37,12 +46,12 @@ const EditPage = (productProps = {}) => {
           type="text"
           name="title"
           id="title"
-          defaultValue={title}
-          onChange={e => setNewTitle(e.target.value)}
+          value={peek(title)}
+          onChange={e => setTitle(e.target.value)}
         />
         <label htmlFor="price">Precio:</label>
         <Input
-          onChange={e => setNewPrice(e.target.value)}
+          onChange={e => setPrice(e.target.value)}
           type="text"
           name="price"
           id="price"
@@ -50,17 +59,17 @@ const EditPage = (productProps = {}) => {
         />
         <label htmlFor="imageLink">Link de Imagen:</label>
         <Input
-          onChange={e => setNewImageLink(e.target.value)}
+          onChange={e => setImageLink(e.target.value)}
           type="text"
           name="imageLink"
           id="imageLink"
-          defaultValue={imageLink}
+          value={imageLink}
         />
         <label htmlFor="category">Categoria:</label>
         <Select
           id="category"
           value={category}
-          onChange={e => setNewCategory(e.target.value)}
+          onChange={e => setCategory(e.target.value)}
         >
           {categories.map((uniqueCategory, i) => (
             <Select.option
@@ -73,11 +82,11 @@ const EditPage = (productProps = {}) => {
         </Select>
         <label htmlFor="description">Descripcion:</label>
         <Input
-          onChange={e => setNewDescription(e.target.value)}
+          onChange={e => setDescription(e.target.value)}
           type="text"
           name="description"
           id="description"
-          defaultValue={text}
+          defaultValue={description}
         />
         <div>
           <Button onClick={handleCancel}>Cancelar</Button>

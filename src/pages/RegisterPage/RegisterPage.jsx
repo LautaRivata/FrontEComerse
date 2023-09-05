@@ -1,8 +1,7 @@
 import React from "react"
 import { Header, Footer } from "../../components"
 import { Button, Input } from "antd"
-import { useState, useEffect } from "react"
-import { sleep } from "../../utils"
+import { useState } from "react"
 import "./styles.css"
 import bcrypt from "bcryptjs"
 
@@ -14,35 +13,21 @@ const RegisterPage = () => {
   const [address, setAddress] = useState("")
   const [telephone, setTelephone] = useState("")
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const isEnabled = true
     const gerarquia = 5
-    const idusers = 35
-    let passEncriptada = "Unpassword123"
 
-    bcrypt
-      .hash(userpass, 10)
-      .then(function (hash) {
-        passEncriptada = hash
-      })
-      .finally(() => {
-        console.log("password: ", passEncriptada)
-      })
+    const passHash = await bcrypt.hash(userpass, 10)
 
-    sleep(200).then(() => {
-      console.log("password: ", passEncriptada)
-    })
-
-    fetch("http://localhost:8080/api/users", {
+    await fetch("http://localhost:8080/api/users", {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        idusers,
         username,
-        userpass: passEncriptada,
+        userpass: passHash,
         name: nombre,
         email,
         telephone,
