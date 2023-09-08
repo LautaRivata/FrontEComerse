@@ -1,9 +1,27 @@
 import React from "react"
 import { Header, Footer } from "../../components"
-import { Button, Input } from "antd"
+import { Button, Input, notification } from "antd"
+import { useNavigate } from "react-router-dom"
+import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons"
 import { useState } from "react"
 import "./styles.css"
 import bcrypt from "bcryptjs"
+
+const openCorrectNotification = title =>
+  notification.open({
+    message: `¡Usuario Creado Correctamente!`,
+    description: title,
+    placement: "topLeft",
+    icon: <CheckOutlined style={{ color: "green" }} />,
+  })
+
+const openFailNotification = title =>
+  notification.open({
+    message: `Hubo un error en el Formulario, Reintentar`,
+    description: title,
+    placement: "topLeft",
+    icon: <ExclamationOutlined style={{ color: "#108ee9" }} />,
+  })
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("") // Estado donde guardaremos el nombre.
@@ -12,6 +30,7 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("")
   const [address, setAddress] = useState("")
   const [telephone, setTelephone] = useState("")
+  const navigate = useNavigate()
 
   const handleSubmit = async () => {
     const isEnabled = true
@@ -19,7 +38,7 @@ const RegisterPage = () => {
 
     const passHash = await bcrypt.hash(userpass, 10)
 
-    await fetch("http://localhost:8080/api/users", {
+    const response = await fetch("http://localhost:8080/api/users", {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -35,7 +54,15 @@ const RegisterPage = () => {
         isEnabled,
         gerarquia,
       }),
-    })
+    }).then(response => response.json())
+
+    console.log(response)
+    if (response.success == true) {
+      openCorrectNotification("Bienvenido")
+      navigate("/")
+    } else {
+      openFailNotification("Error")
+    }
   }
 
   return (

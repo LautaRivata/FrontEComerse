@@ -9,7 +9,6 @@ const Product = productProps => {
   const actions = useCartStore(state => state.actions)
   const navigate = useNavigate()
   const handelEdit = pk => {
-    console.log("Editar", pk)
     navigate(`/Editpage/${pk}`)
   }
 

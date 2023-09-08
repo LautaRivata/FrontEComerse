@@ -4,7 +4,7 @@ import "./styles.css"
 import { useUserStore } from "../../stores"
 
 const Header = () => {
-  const userlog = useUserStore(state => state.userlog)
+  const { userlog, username } = useUserStore(state => state.userSecion)
   return (
     <div className="header">
       <Link to="/">
@@ -21,9 +21,12 @@ const Header = () => {
           <span>Edtiar</span>
         </Link>
         {userlog ? (
-          <Link to="/logout">
-            <span>Log Out</span>
-          </Link>
+          <div>
+            <Link to="/logout">
+              <span>Log Out</span>
+            </Link>
+            <span>@{username}</span>
+          </div>
         ) : (
           <div>
             <Link to="/login">

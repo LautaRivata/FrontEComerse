@@ -1,6 +1,9 @@
 "use strict"
+import bcrypt from "bcryptjs"
 
 const checkLogin = async function (values) {
+  // const passHash = await bcrypt.hash(values.password, 10)
+
   const response = await fetch("http://localhost:8080/api/users/login", {
     method: "POST",
     headers: {

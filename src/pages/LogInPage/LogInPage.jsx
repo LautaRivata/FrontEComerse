@@ -4,6 +4,9 @@ import { Button, Form, Input } from "antd"
 import { notification } from "antd"
 import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons"
 import { checkLogin } from "../../utils"
+import { useUserStore } from "../../stores"
+import { useNavigate } from "react-router-dom"
+import "./styles.css"
 
 const openLogFailNotification = title =>
   notification.open({
@@ -21,20 +24,29 @@ const openLogCorrectNotification = title =>
     icon: <CheckOutlined style={{ color: "green" }} />,
   })
 
-const onFinish = values => {
-  checkLogin(values).then(data => {
-    if (data.log === true) {
-      openLogCorrectNotification(data.user)
-    } else {
-      openLogFailNotification(data.user)
-    }
-  })
-}
 const onFinishFailed = errorInfo => {
   console.log("Failed:", errorInfo)
 }
 
 const LogInPage = () => {
+  const logUser = useUserStore(state => state.logUser)
+  const navigate = useNavigate()
+  const onFinish = values => {
+    console.log(values)
+    checkLogin(values).then(data => {
+      if (data.log === true) {
+        openLogCorrectNotification(data.user)
+        logUser({
+          username: data.username,
+          usergerarquia: data.usergerarquia,
+          userlog: data.log,
+        })
+        navigate(`/`)
+      } else {
+        openLogFailNotification(data.user)
+      }
+    })
+  }
   return (
     <div className="contenedor">
       <Header />
@@ -52,7 +64,7 @@ const LogInPage = () => {
           style={{
             maxWidth: 600,
           }}
-          onFinish={onFinish}
+          onFinish={values => onFinish(values)}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
         >
