@@ -1,7 +1,5 @@
 "use strict"
 
-import { peek } from "."
-
 const addFilters = (products, filters) => {
   let filtrado = products
   if (filters.title !== "") {
@@ -12,6 +10,9 @@ const addFilters = (products, filters) => {
   if (filters.price !== 0) {
     filtrado = filtrado.filter(product => product.price > filters.price)
   }
+  if (filters.priceMax !== 0) {
+    filtrado = filtrado.filter(product => product.price < filters.priceMax)
+  }
   if (filters.category !== "") {
     filtrado = filtrado.filter(product =>
       filters.category === "-" ? true : product.category === filters.category
@@ -20,7 +21,7 @@ const addFilters = (products, filters) => {
   filtrado = filtrado
     .slice()
     .sort((a, b) => (filters.isSort ? a.price - b.price : 0))
-  return peek(filtrado)
+  return filtrado
 }
 
 export default addFilters

@@ -10,6 +10,7 @@ import "./styles.css"
 function HomePage() {
   const [title, setTitle] = useState("")
   const [price, setPrice] = useState(0)
+  const [priceMax, setPriceMax] = useState(0)
   const [isSort, setIsSort] = useState(false)
   const [category, setCategory] = useState("")
   const { categories, products, isLoading } = useProductosQuery()
@@ -50,11 +51,20 @@ function HomePage() {
           </div>
 
           <div className="search-input">
-            <label htmlFor="precio">Precio mínimo:</label>
+            <label htmlFor="precio">Precio Mínimo:</label>
             <input
               id="precio"
               type="number"
               onChange={e => setPrice(e.target.valueAsNumber || 0)}
+            />
+          </div>
+
+          <div className="search-input">
+            <label htmlFor="precioMax">Precio Maximo:</label>
+            <input
+              id="precioMax"
+              type="number"
+              onChange={e => setPriceMax(e.target.valueAsNumber || 0)}
             />
           </div>
 
@@ -98,7 +108,13 @@ function HomePage() {
           <span>cargando...</span>
         ) : (
           <Products
-            products={addFilters(products, { price, category, title, isSort })}
+            products={addFilters(products, {
+              price,
+              category,
+              title,
+              isSort,
+              priceMax,
+            })}
           />
         )}
       </section>

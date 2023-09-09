@@ -4,7 +4,17 @@ import "./styles.css"
 import { useUserStore } from "../../stores"
 
 const Header = () => {
-  const { userlog, username } = useUserStore(state => state.userSecion)
+  const { userlog, username, usergerarquia } = useUserStore(
+    state => state.userSecion
+  )
+
+  let autorizado
+  if (usergerarquia > 90) {
+    autorizado = true
+  } else {
+    autorizado = false
+  }
+
   return (
     <div className="header">
       <Link to="/">
@@ -17,9 +27,14 @@ const Header = () => {
         <Link to="/">
           <span>Home</span>
         </Link>
-        <Link to="/EditPage">
-          <span>Edtiar</span>
-        </Link>
+        {autorizado ? (
+          <Link to="/EditPage">
+            <span>Agregar Producto</span>
+          </Link>
+        ) : (
+          <></>
+        )}
+
         {userlog ? (
           <div>
             <Link to="/logout">

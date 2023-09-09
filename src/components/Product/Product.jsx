@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import { Button, Card, Image } from "antd"
-import { useCartStore } from "../../stores"
+import { useCartStore, useUserStore } from "../../stores"
 import { useNavigate } from "react-router-dom"
 import "./styles.css"
 
@@ -8,8 +8,15 @@ const Product = productProps => {
   const { title, text, imageLink, price, primarikey, category } = productProps
   const actions = useCartStore(state => state.actions)
   const navigate = useNavigate()
+  const { usergerarquia } = useUserStore(state => state.userSecion)
   const handelEdit = pk => {
     navigate(`/Editpage/${pk}`)
+  }
+  let autorizado
+  if (usergerarquia > 90) {
+    autorizado = true
+  } else {
+    autorizado = false
   }
 
   return (
@@ -26,9 +33,13 @@ const Product = productProps => {
         }
       >
         <Card.Meta title={price && <p>${price}</p>} description={text} />
-        <Button type="primary" onClick={() => handelEdit(primarikey)}>
-          Editar Producto
-        </Button>
+        {autorizado ? (
+          <Button type="primary" onClick={() => handelEdit(primarikey)}>
+            Editar Producto
+          </Button>
+        ) : (
+          <></>
+        )}
       </Card>
     </div>
   )

@@ -24,7 +24,7 @@ const LogoutPage = () => {
     await fetch("http://localhost:8080/api/users/logout").then(
       console.log("secion Cerrada")
     )
-    logoutUser
+    logoutUser()
     openLogCorrectNotification("Adios")
     await sleep(2000)
     navigate(`/`)
