@@ -9,6 +9,8 @@ import {
   RegisterPage,
   EditPage,
   LogoutPage,
+  ConfirmPage,
+  OrdersPage,
 } from "./pages"
 
 const queryClient = new QueryClient()
@@ -24,6 +26,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/logout" element={<LogoutPage />} />
           <Route path="/EditPage/:id?" element={<EditPage />} />
+          <Route path="/OrdersPage/:id?" element={<OrdersPage />} />
+          <Route path="/ConfirmPage" element={<ConfirmPage />} />
         </Routes>
       </BrowserRouter>
 

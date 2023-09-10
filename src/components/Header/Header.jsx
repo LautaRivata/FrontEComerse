@@ -28,17 +28,25 @@ const Header = () => {
           <span>Home</span>
         </Link>
         {autorizado ? (
-          <Link to="/EditPage">
-            <span>Agregar Producto</span>
-          </Link>
+          <div>
+            <Link to="/EditPage">
+              <span>Agregar Producto</span>
+            </Link>
+            <Link to="/OrdersPage">
+              <span>Ordenes</span>
+            </Link>
+          </div>
         ) : (
-          <></>
+          <div></div>
         )}
 
         {userlog ? (
           <div>
             <Link to="/logout">
               <span>Log Out</span>
+            </Link>
+            <Link to="/ConfirmPage">
+              <span>Carrito</span>
             </Link>
             <span>@{username}</span>
           </div>

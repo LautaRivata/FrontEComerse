@@ -32,11 +32,11 @@ const LogInPage = () => {
   const logUser = useUserStore(state => state.logUser)
   const navigate = useNavigate()
   const onFinish = values => {
-    console.log(values)
     checkLogin(values).then(data => {
       if (data.log === true) {
         openLogCorrectNotification(data.user)
         logUser({
+          userID: data.userID,
           username: data.username,
           usergerarquia: data.usergerarquia,
           userlog: data.log,
@@ -80,7 +80,6 @@ const LogInPage = () => {
           >
             <Input />
           </Form.Item>
-
           <Form.Item
             label="Password"
             name="password"

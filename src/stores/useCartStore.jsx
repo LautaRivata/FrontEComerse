@@ -1,6 +1,7 @@
 import { create } from "zustand"
 import { notification } from "antd"
 import { CheckOutlined, ExclamationOutlined } from "@ant-design/icons"
+import { peek } from "../utils"
 
 const openAddNotification = title =>
   notification.open({
@@ -24,7 +25,7 @@ const useCartStore = create(set => ({
     addProduct: product =>
       set(state => {
         openAddNotification(product.title)
-        return { products: [...state.products, product] }
+        return { products: [...state.products, { product, cantidad: 1 }] }
       }),
     removeProduct: index =>
       set(state => ({
@@ -36,6 +37,20 @@ const useCartStore = create(set => ({
           return true
         }),
       })),
+    increaseProduct: index => {
+      set(state => {
+        state.products[index].cantidad++
+        return { products: [...state.products] }
+      })
+    },
+    decreaseProduct: index => {
+      set(state => {
+        if (state.products[index].cantidad > 1) {
+          state.products[index].cantidad--
+        }
+        return { products: [...state.products] }
+      })
+    },
   },
 }))
 

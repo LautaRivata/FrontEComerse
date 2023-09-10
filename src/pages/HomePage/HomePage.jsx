@@ -1,9 +1,10 @@
 import { useState } from "react"
 import { Cart, Products, Header, Footer } from "../../components"
 import { useOrderMutation, useProductosQuery } from "../../hooks"
-import { useCartStore } from "../../stores"
+import { useUserStore } from "../../stores"
 import { Button, Drawer } from "antd"
 import { ShoppingCartOutlined } from "@ant-design/icons"
+import { Link, useNavigate } from "react-router-dom"
 import { addFilters } from "../../utils"
 import "./styles.css"
 
@@ -15,8 +16,20 @@ function HomePage() {
   const [category, setCategory] = useState("")
   const { categories, products, isLoading } = useProductosQuery()
   const [isShow, setIsShow] = useState(false)
+  const navigate = useNavigate()
   const { createOrder } = useOrderMutation()
-  const orderProducts = useCartStore(state => state.products)
+  const { userlog, userID, usergerarquia } = useUserStore(
+    state => state.userSecion
+  )
+  let autorizado
+  if (usergerarquia > 90) {
+    autorizado = true
+  } else {
+    autorizado = false
+  }
+  const handleComprar = () => {
+    navigate(`/ConfirmPage`)
+  }
 
   return (
     <div className="contenedor">
@@ -26,9 +39,22 @@ function HomePage() {
         <Drawer
           title={
             <div className="div-comprar">
-              <Button onClick={() => createOrder({ order: orderProducts })}>
-                Comprar
-              </Button>
+              {userlog ? (
+                <div>
+                  {autorizado ? (
+                    <div>
+                      <p>Sos Admin</p>
+                    </div>
+                  ) : (
+                    <Button onClick={() => handleComprar()}>Comprar</Button>
+                  )}
+                </div>
+              ) : (
+                <Link to="/login">
+                  <span>Log In</span>
+                </Link>
+              )}
+
               <p>Tus Productos</p>
             </div>
           }

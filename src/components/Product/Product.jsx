@@ -8,7 +8,7 @@ const Product = productProps => {
   const { title, text, imageLink, price, primarikey, category } = productProps
   const actions = useCartStore(state => state.actions)
   const navigate = useNavigate()
-  const { usergerarquia } = useUserStore(state => state.userSecion)
+  const { usergerarquia, userID } = useUserStore(state => state.userSecion)
   const handelEdit = pk => {
     navigate(`/Editpage/${pk}`)
   }
