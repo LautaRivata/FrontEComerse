@@ -10,21 +10,28 @@
   justify-content: space-between;
 }
 
-.footer .links {
+.footer nav {
+  width: 70%;
+  /* Flexbox */
+
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
-.footer .links a {
-  flex-grow: 1;
-
+.footer nav span {
   color: #fff;
-  padding: 10px;
+  font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
+  padding: 10px;
+
+  /* Flexbox */
+  flex-grow: 1;
 }
 
-.footer .links a:hover {
+.footer nav span:hover {
   background: var(--otro--uno);
 }
 

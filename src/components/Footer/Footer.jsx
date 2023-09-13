@@ -6,18 +6,64 @@ import {
   faSquareInstagram,
   faSquareXTwitter,
 } from "@fortawesome/free-brands-svg-icons"
+import { Link } from "react-router-dom"
+import { useUserStore } from "../../stores"
+import "./styles.css"
 
 import "./styles.css"
 
 const Footer = () => {
+  const { userlog, username, usergerarquia } = useUserStore(
+    state => state.userSecion
+  )
+
+  let autorizado
+  if (usergerarquia > 90) {
+    autorizado = true
+  } else {
+    autorizado = false
+  }
+
   return (
     <div className="footer">
-      <section className="links">
-        <a href="#">Inicio</a>
-        <a href="#">Blog</a>
-        <a href="#">Proyectos</a>
-        <a href="#">Contacto</a>
-      </section>
+      <nav>
+        <Link to="/">
+          <span>Home</span>
+        </Link>
+        {autorizado ? (
+          <div>
+            <Link to="/EditPage">
+              <span>Agregar Producto</span>
+            </Link>
+            <Link to="/OrdersPage">
+              <span>Ordenes</span>
+            </Link>
+          </div>
+        ) : (
+          <div></div>
+        )}
+
+        {userlog ? (
+          <div>
+            <Link to="/logout">
+              <span>Log Out</span>
+            </Link>
+            <Link to="/ConfirmPage">
+              <span>Carrito</span>
+            </Link>
+            <span>@{username}</span>
+          </div>
+        ) : (
+          <div>
+            <Link to="/login">
+              <span>Log In</span>
+            </Link>
+            <Link to="/register">
+              <span>Register</span>
+            </Link>
+          </div>
+        )}
+      </nav>
 
       <div className="social">
         <a href="#">
